@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   final String baseUrl =
-      "https://9738beb516a7.ngrok-free.app/api"; // ganti IP sesuai lokal lu
+      "https://9738beb516a7.ngrok-free.app/api"; // url
 
   // Login
   Future<bool> login(String email, String password) async {
@@ -47,7 +47,7 @@ class AuthService {
     }
   }
 
-  // Ambil Driver (pakai token)
+  // Ambil Driver 
   Future<Map<String, dynamic>?> getUser(int? id) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -68,7 +68,7 @@ class AuthService {
     return null;
   }
 
-  // Ambil Delivery Order (pakai token)
+  // Ambil Delivery Order 
   Future<List<Map<String, dynamic>>> getOrders(int? id) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -109,7 +109,7 @@ class AuthService {
     return [];
   }
 
-  // Ambil Delivery Order Detail (pakai token)
+  // Ambil Delivery Order Detail
   Future<Map<String, dynamic>?> getOrderDetail(int? id) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -135,7 +135,7 @@ class AuthService {
         final Map<String, dynamic> json = jsonDecode(response.body);
 
         if (json['status'] == true && json['data'] != null) {
-          final Map<String, dynamic> data = json['data']; // ✅ bukan List
+          final Map<String, dynamic> data = json['data']; 
           return data;
         } else {
           print("Response status false / data kosong");
@@ -150,6 +150,8 @@ class AuthService {
     return null;
   }
 
+
+  // Update Order Status
   Future<void> updateOrderStatus(int orderId, String nextStatus) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -170,6 +172,7 @@ class AuthService {
     return null;
   }
 
+  // Ambil Order Delivered
   Future<List<Map<String, dynamic>>> getOrdersDelivered(
     int? driverId, {
     DateTime? startDate,
