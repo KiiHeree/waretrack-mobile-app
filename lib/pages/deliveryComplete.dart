@@ -37,7 +37,7 @@ class _DeliveryCompleteState extends State<DeliveryComplete> {
     int? driverId = prefs.getInt("user_id");
     print(driverId);
     setState(() {
-      _futureOrders = AuthService().getOrdersDelivered(
+      _futureOrders = ApiService().getOrdersDelivered(
         driverId,
         startDate: start,
         endDate: end,

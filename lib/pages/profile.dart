@@ -30,7 +30,7 @@ class _ProfileState extends State<Profile> {
       return;
     }
 
-    final userData = await AuthService().getUser(userId);
+    final userData = await ApiService().getUser(userId);
 
     if (userData != null) {
       setState(() {

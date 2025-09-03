@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    final userData = await AuthService().getUser(userId);
+    final userData = await ApiService().getUser(userId);
 
     if (userData != null) {
       setState(() {
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                       context,
                       MaterialPageRoute(builder: (context) => Profile()),
                     ).then((_) async {
-                      final orders = await AuthService().getOrders(
+                      final orders = await ApiService().getOrders(
                         _user?['id'],
                       );
                       setState(() {
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                         builder: (context) => DeliveryComplete(),
                       ),
                     ).then((_) async {
-                      final orders = await AuthService().getOrders(
+                      final orders = await ApiService().getOrders(
                         _user?['id'],
                       );
                       setState(() {
@@ -183,7 +183,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             FutureBuilder<List<Map<String, dynamic>>>(
-              future: AuthService().getOrders(_user?['id']),
+              future: ApiService().getOrders(_user?['id']),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -239,7 +239,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 24),
             Expanded(
               child: FutureBuilder<List<Map<String, dynamic>>>(
-                future: AuthService().getOrders(
+                future: ApiService().getOrders(
                   _user?['id'],
                 ), // pake id driver lo
                 builder: (context, snapshot) {
@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                                         DeliveryDetail(orderId: order['id']),
                                   ),
                                 ).then((_) async {
-                                  final orders = await AuthService().getOrders(
+                                  final orders = await ApiService().getOrders(
                                     _user?['id'],
                                   );
                                   setState(() {
@@ -607,8 +607,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _handleLogout(BuildContext context) async {
     // Panggil API Logout
-    final authService = AuthService();
-    await authService.logout();
+    final authLogout = ApiService();
+    await authLogout.logout();
 
     // Hapus token JWT
     final prefs = await SharedPreferences.getInstance();

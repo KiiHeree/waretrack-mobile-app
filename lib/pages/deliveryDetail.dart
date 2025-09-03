@@ -22,7 +22,7 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
   }
 
   Future<void> _fetchOrder() async {
-    final data = await AuthService().getOrderDetail(widget.orderId);
+    final data = await ApiService().getOrderDetail(widget.orderId);
     setState(() {
       order = data;
     });
@@ -504,7 +504,7 @@ class _DeliveryDetailState extends State<DeliveryDetail> {
                                       return;
                                     }
 
-                                    await AuthService().updateOrderStatus(
+                                    await ApiService().updateOrderStatus(
                                       order?['id'],
                                       nextStatus,
                                     );

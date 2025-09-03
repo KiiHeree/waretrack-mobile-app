@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final AuthService _authService = AuthService();
+  final ApiService _authService = ApiService();
 
   void login() async {
     bool success = await _authService.login(
